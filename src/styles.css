@@ -142,3 +142,39 @@
     color: var(--color-foreground);
   }
 }
+
+/* HomeBound theme */
+@theme inline {
+  --color-lost: var(--lost);
+  --color-lost-foreground: var(--lost-foreground);
+  --color-found: var(--found);
+  --color-found-foreground: var(--found-foreground);
+  --font-display: "Fredoka", ui-rounded, sans-serif;
+  --font-sans: "Nunito", ui-rounded, sans-serif;
+}
+:root {
+  --radius: 1rem;
+  --background: oklch(0.975 0.022 95);
+  --foreground: oklch(0.28 0.05 145);
+  --card: oklch(0.995 0.01 95);
+  --card-foreground: oklch(0.28 0.05 145);
+  --popover: oklch(0.995 0.01 95);
+  --popover-foreground: oklch(0.28 0.05 145);
+  --primary: oklch(0.45 0.11 145);
+  --primary-foreground: oklch(0.98 0.02 95);
+  --secondary: oklch(0.66 0.11 135);
+  --secondary-foreground: oklch(0.99 0.01 95);
+  --muted: oklch(0.94 0.03 100);
+  --muted-foreground: oklch(0.48 0.04 140);
+  --accent: oklch(0.92 0.06 130);
+  --accent-foreground: oklch(0.3 0.07 145);
+  --border: oklch(0.89 0.04 110);
+  --input: oklch(0.89 0.04 110);
+  --ring: oklch(0.55 0.11 140);
+  --lost: oklch(0.62 0.15 45);
+  --lost-foreground: oklch(0.99 0.01 80);
+  --found: oklch(0.55 0.13 145);
+  --found-foreground: oklch(0.99 0.01 95);
+}
+body { font-family: var(--font-sans); }
+h1, h2, h3, .font-display { font-family: var(--font-display); }
