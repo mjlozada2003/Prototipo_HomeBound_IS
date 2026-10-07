@@ -37,7 +37,7 @@ function AuthPage() {
 
   useEffect(() => { if (session) navigate({ to: "/" }); }, [session, navigate]);
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent): Promise<unknown> => {
     e.preventDefault();
     setErrors({});
     if (mode === "signup") {

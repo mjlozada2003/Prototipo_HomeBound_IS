@@ -13,7 +13,7 @@ import { SUBCATEGORIES, resizeImage, type Category, type Kind } from "@/lib/home
 
 export const Route = createFileRoute("/_authenticated/publicar")({
   validateSearch: (s: Record<string, unknown>): { tipo?: Kind } =>
-    s.tipo === "perdido" || s.tipo === "encontrado" ? { tipo: s.tipo } : {},
+    s["tipo"] === "perdido" || s["tipo"] === "encontrado" ? { tipo: s["tipo"] } : {},
   head: () => ({
     meta: [
       { title: "Publicar — HomeBound" },
@@ -51,15 +51,15 @@ function Publish() {
       : z.string().trim().max(120),
   });
 
-  const onPhoto = async (file?: File) => {
+  const onPhoto = async (file?: File): Promise<void> => {
     if (!file) return;
-    if (!file.type.startsWith("image/")) return toast.error("El archivo debe ser una imagen");
+    if (!file.type.startsWith("image/")) { toast.error("El archivo debe ser una imagen"); return; }
     setF((p) => ({ ...p, photo: "" }));
     const data = await resizeImage(file);
     setF((p) => ({ ...p, photo: data }));
   };
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     const r = schema.safeParse({ ...f, category });
     if (!r.success) {
@@ -77,8 +77,8 @@ function Publish() {
     }).select("id").single();
     setSaving(false);
     if (error) {
-      if (error.code === "23505") return toast.error("Ya publicaste esto antes: misma publicación, tipo, categoría y fecha.");
-      return toast.error("No se pudo publicar. Revisa los datos.");
+      toast.error(error.code === "23505" ? "Ya publicaste esto antes: misma publicación, tipo, categoría y fecha." : "No se pudo publicar. Revisa los datos.");
+      return;
     }
     qc.invalidateQueries({ queryKey: ["posts"] });
     toast.success("¡Publicación creada! Ya es visible para la comunidad.");

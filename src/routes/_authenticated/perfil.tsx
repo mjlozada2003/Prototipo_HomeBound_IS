@@ -35,7 +35,7 @@ function Profile() {
 
   const toggle = async (p: Post) => {
     const { error } = await supabase.from("posts").update({ resolved: !p.resolved }).eq("id", p.id);
-    if (error) return toast.error("No se pudo actualizar");
+    if (error) { toast.error("No se pudo actualizar"); return; }
     toast.success(p.resolved ? "Publicación reactivada" : "¡Qué alegría! Marcada como resuelta");
     qc.invalidateQueries();
   };
