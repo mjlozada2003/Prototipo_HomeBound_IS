@@ -37,7 +37,7 @@ function AuthPage() {
 
   useEffect(() => { if (session) navigate({ to: "/" }); }, [session, navigate]);
 
-  const submit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent): Promise<unknown> => {
     e.preventDefault();
     setErrors({});
     if (mode === "signup") {
@@ -62,6 +62,7 @@ function AuthPage() {
       if (error) return toast.error("Correo o contraseña incorrectos");
       toast.success("Sesión iniciada");
     }
+    return;
   };
 
   const field = (k: keyof typeof form, label: string, type = "text") => (
