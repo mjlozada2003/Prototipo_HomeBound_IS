@@ -62,6 +62,7 @@ function AuthPage() {
       if (error) return toast.error("Correo o contraseña incorrectos");
       toast.success("Sesión iniciada");
     }
+    return;
   };
 
   const field = (k: keyof typeof form, label: string, type = "text") => (
